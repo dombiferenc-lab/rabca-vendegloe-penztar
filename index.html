@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rabca Vendéglő – Pénztár</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0f766e">
+</head>
+<body>
+    <header>
+        <h1>🍺 Rabca Vendéglő – Pénztár</h1>
+    </header>
+
+    <main>
+        <div id="items"></div>
+        
+        <div id="total">
+            <div class="total-line">
+                <span>Végösszeg:</span>
+                <strong id="grandTotal">0 Ft</strong>
+            </div>
+            <div class="actions">
+                <button id="addItemBtn" class="secondary">📋 Új tétel hozzáadása</button>
+                <button id="resetBtn" class="ghost">🗑️ Nullázás</button>
+                <button id="editBtn" class="ghost">⚙️ Tételek szerkesztése</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Új tétel hozzáadása dialog -->
+    <dialog id="addDialog">
+        <h3>📋 Új tétel hozzáadása</h3>
+        <div class="category-selector">
+            <label>Kategória:</label>
+            <select id="categorySelect">
+                <option value="">Válassz kategóriát...</option>
+            </select>
+        </div>
+        <div class="subcategory-selector" style="display: none;">
+            <label>Alkategória:</label>
+            <select id="subcategorySelect">
+                <option value="">Válassz alkategóriát...</option>
+            </select>
+        </div>
+        <div class="item-selector" style="display: none;">
+            <label>Tétel:</label>
+            <select id="itemSelect">
+                <option value="">Válassz tételt...</option>
+            </select>
+        </div>
+        <div class="manual-entry" style="display: none;">
+            <form id="addForm">
+                <input type="text" id="newName" placeholder="Tétel neve" required>
+                <input type="number" id="newPrice" placeholder="Ár (Ft)" min="0" step="1" required>
+            </form>
+        </div>
+        <div class="dialog-actions">
+            <button id="addManualBtn" class="secondary">✏️ Kézi bevitel</button>
+            <button id="addSelectedBtn" class="primary" disabled>➕ Hozzáadás</button>
+            <button id="cancelAdd" class="ghost">❌ Mégse</button>
+        </div>
+    </dialog>
+
+    <!-- Tételek szerkesztése dialog -->
+    <dialog id="editDialog">
+        <h3>⚙️ Tételek és árak</h3>
+        <div id="editList"></div>
+        <div class="dialog-actions">
+            <button id="saveEditBtn" class="primary">💾 Mentés</button>
+            <button id="cancelEditBtn" class="ghost">❌ Mégse</button>
+        </div>
+    </dialog>
+
+    <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js');
+        }
+    </script>
+</body>
+</html>
